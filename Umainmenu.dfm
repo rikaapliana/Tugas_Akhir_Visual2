@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 384
-  Top = 155
+  Left = 248
+  Top = 94
   Width = 926
   Height = 651
   Caption = 'MENU UTAMA'
@@ -29,21 +29,27 @@ object Form1: TForm1
       end
       object fDATAWALIKELAS1: TMenuItem
         Caption = 'DATA WALI KELAS'
+        OnClick = fDATAWALIKELAS1Click
       end
       object fDATASEMESTER1: TMenuItem
         Caption = 'DATA SEMESTER'
+        OnClick = fDATASEMESTER1Click
       end
       object fDATAPOIN1: TMenuItem
         Caption = 'DATA POIN'
+        OnClick = fDATAPOIN1Click
       end
       object fDATAORANGTUA1: TMenuItem
         Caption = 'DATA ORANG TUA'
+        OnClick = fDATAORANGTUA1Click
       end
       object fDATAHUBUNGAN1: TMenuItem
         Caption = 'DATA HUBUNGAN'
+        OnClick = fDATAHUBUNGAN1Click
       end
       object fDATAUSER1: TMenuItem
         Caption = 'DATA USER'
+        OnClick = fDATAUSER1Click
       end
     end
   end

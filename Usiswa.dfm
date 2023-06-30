@@ -600,7 +600,6 @@ object Form3: TForm3
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'id_siswa'
           DataSet = frxdbsiswa
           DataSetName = 'frxdbsiswa'
           Font.Charset = DEFAULT_CHARSET

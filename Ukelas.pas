@@ -132,25 +132,15 @@ end;
 
 procedure TForm2.btn3Click(Sender: TObject);
 begin
- if (edt1.Text= '')or(edt2.Text ='') then
-begin
-  ShowMessage('INPUTAN WAJIB DIISI!');
-end else
-if edt1.Text = zqry1.Fields[1].AsString then
-begin
-ShowMessage('DATA TIDAK ADA PERUBAHAN');
-end else
-begin
-ShowMessage('DATA BERHASIL DIUPDATE!');
 zqry1.SQL.Clear;
-zqry1.SQL.Add('Update tbl_kelas set nama="'+edt1.Text+'",jurusan="'+edt2.Text+'" where id_siswa ="'+id+'"');
+zqry1.SQL.Add('Update tbl_kelas set nama="'+edt1.Text+'",jurusan="'+edt2.Text+'" where id_kelas ="'+id+'"');
 zqry1.ExecSQL;
 
 zqry1.SQL.Clear;
 zqry1.SQL.Add('select * from tbl_kelas');
 zqry1.Open;
 posisiawal;
-end;
+
 end;
 
 procedure TForm2.btn5Click(Sender: TObject);

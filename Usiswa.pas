@@ -241,17 +241,6 @@ end;
 
 procedure TForm3.btn3Click(Sender: TObject);
 begin
-if (edt1.Text= '')or(edt2.Text ='')or(edt3.Text= '')or(edt4.Text ='')or(edt5.Text ='')or(edt6.Text ='')or(edt7.Text ='')or(edt8.Text ='')or(edt9.Text ='')or(edt10.Text ='')or(edt11.Text ='')or(edt12.Text ='')or(edt13.Text ='') then
-begin
-  ShowMessage('INPUTAN WAJIB DIISI!');
-end else
-if edt1.Text = zqry1.Fields[1].AsString then
-begin
- ShowMessage('DATA TIDAK ADA PERUBAHAN');
- posisiawal;
-end else
-begin
-ShowMessage('DATA BERHASIL DIUPDATE!');
 zqry1.SQL.Clear;
 zqry1.SQL.Add('Update tbl_siswa set nis="'+edt1.Text+'",nisn="'+edt2.Text+'",nama_siswa="'+edt3.Text+'",nik="'+edt4.Text+'",tempat_lahir="'+edt5.Text+'",tanggal_lahir="'+edt6.Text+'",jenis_kelamin="'+edt7.Text+'",alamat="'+edt8.Text+'",telp="'+edt9.Text+'",status="'+edt10.Text+'",tingkat_kelas="'+edt11.Text+'",jurusan="'+edt12.Text+'",wali_kelas="'+edt13.Text+'" where id_siswa ="'+id+'"');
 zqry1.ExecSQL;
@@ -262,7 +251,6 @@ zqry1.Open;
 posisiawal;
 end;
 
-end;
 
 procedure TForm3.btn5Click(Sender: TObject);
 begin
