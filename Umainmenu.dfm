@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 248
-  Top = 94
+  Left = 349
+  Top = 197
   Width = 926
-  Height = 651
+  Height = 474
   Caption = 'MENU UTAMA'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET

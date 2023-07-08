@@ -21,20 +21,21 @@ type
     btn5: TButton;
     edt1: TEdit;
     edt2: TEdit;
-    edt3: TEdit;
-    edt4: TEdit;
     con1: TZConnection;
     zqry1: TZQuery;
     ds1: TDataSource;
-    frxdbpoin: TfrxDBDataset;
-    frxpoin: TfrxReport;
     intgrfldzqry1id_poin: TIntegerField;
     strngfldzqry1nama_poin: TStringField;
     strngfldzqry1bobot: TStringField;
     strngfldzqry1jenis: TStringField;
     strngfldzqry1status: TStringField;
+    Cb1: TComboBox;
+    Cb2: TComboBox;
+    frxpoin: TfrxReport;
+    frxdbpoin: TfrxDBDataset;
     procedure posisiawal;
     procedure bersih;
+    procedure enable;
     procedure FormShow(Sender: TObject);
     procedure btn2Click(Sender: TObject);
     procedure btn1Click(Sender: TObject);
@@ -60,8 +61,6 @@ procedure TForm6.bersih;
 begin
 edt1.Clear;
 edt2.Clear;
-edt3.Clear;
-edt4.Clear;
 end;
 
 procedure TForm6.posisiawal;
@@ -72,10 +71,11 @@ btn2.Enabled:= False;
 btn3.Enabled:= False;
 btn4.Enabled:= False;
 btn5.Enabled:= False;
+
 edt1.Enabled:= False;
 edt2.Enabled:= False;
-edt3.Enabled:= False;
-edt4.Enabled:= False;
+Cb1.Enabled:= False;
+Cb2.Enabled:= False;
 end;
 
 procedure TForm6.FormShow(Sender: TObject);
@@ -85,48 +85,38 @@ end;
 
 procedure TForm6.btn2Click(Sender: TObject);
 begin
-if edt1.Text ='' then
-begin
-ShowMessage('NAMA POIN TIDAK BOLEH KOSONG!');
-end else
-if edt2.Text ='' then
-begin
-ShowMessage('BOBOT TIDAK BOLEH KOSONG!');
-end else
-if edt3.Text ='' then
-begin
-ShowMessage('JENIS KELAS KELAMIN TIDAK BOLEH KOSONG!');
-end else
-if edt4.Text ='' then
-begin
-ShowMessage('STATUS TIDAK BOLEH KOSONG!');
-end else
+if (edt1.Text='') or (edt2.Text='') then
+  begin
+    ShowMessage('DATA TIDAK BOLEH KOSONG!');
+  end else
+  if (zqry1.Locate('nama_poin', edt1.Text,[])) and (zqry1.Locate('bobot', edt2.Text,[]))  then
+  begin
+    ShowMessage('DATA SISWA SUDAH DIGUNAKAN!');
+    posisiawal;
+  end else
+  begin
+  zqry1.SQL.Clear; //simpan
+  zqry1.SQL.Add('insert into tbl_poin values(null,"'+edt1.Text+'","'+edt2.Text+'","'+Cb1.Text+'","'+Cb2.Text+'")');
+  zqry1.ExecSQL;
 
-begin
-zqry1.SQL.Clear; //simpan
-zqry1.SQL.Add('insert into tbl_poin values(null,"'+edt1.Text+'","'+edt2.Text+'","'+edt3.Text+'","'+edt4.Text+'")');
-zqry1.ExecSQL;
+  zqry1.SQL.Clear;
+  zqry1.SQL.Add('select * from tbl_poin');
+  zqry1.Open;
+  ShowMessage('DATA BARHASIL DISIMPAN!');
+  posisiawal;
 
-zqry1.SQL.Clear;
-zqry1.SQL.Add('select * from tbl_poin');
-zqry1.Open;
-ShowMessage('DATA BARHASIL DISIMPAN!');
-posisiawal;
-end;
+  end;
 end;
 
 procedure TForm6.btn1Click(Sender: TObject);
 begin
+enable;
 bersih;
 btn1.Enabled:= false;
 btn2.Enabled:= True;
 btn3.Enabled:= False;
 btn4.Enabled:= False;
 btn5.Enabled:= True;
-edt1.Enabled:= True;
-edt2.Enabled:= True;
-edt3.Enabled:= True;
-edt4.Enabled:= True;
 end;
 
 procedure TForm6.btn4Click(Sender: TObject);
@@ -151,14 +141,28 @@ end;
 
 procedure TForm6.btn3Click(Sender: TObject);
 begin
-zqry1.SQL.Clear;
-zqry1.SQL.Add('Update tbl_poin set nama_poin="'+edt1.Text+'",bobot="'+edt2.Text+'",jenis="'+edt3.Text+'",status="'+edt4.Text+'" where id_poin ="'+id+'"');
-zqry1.ExecSQL;
+if (edt1.Text='') or (edt2.Text='')then
+  begin
+    ShowMessage('DATA TIDAK BOLEH KOSONG!');
+  end else
+    if (edt1.Text= zqry1.FieldList[1].AsString) and (edt2.Text = zqry1.FieldList[2].AsString) and (Cb1.Text = zqry1.FieldList[3].AsString) and (Cb2.Text = zqry1.FieldList[4].AsString) then
+  begin
+    ShowMessage('DATA TIDAK ADA PERUBAHAN');
+    posisiawal;
+  end else
+  begin
+  id:=dgdbgrd1.DataSource.DataSet.FieldByName('id').AsString;
+  ShowMessage('DATA BERHASIL DI UPDATE!');
+  zqry1.SQL.Clear;
+  zqry1.SQL.Add('Update tbl_poin set nama_poin="'+edt1.Text+'",bobot="'+edt2.Text+'",jenis="'+Cb1.Text+'",status="'+Cb2.Text+'" where id_poin ="'+id+'"');
+  zqry1.ExecSQL;
 
-zqry1.SQL.Clear;
-zqry1.SQL.Add('select * from tbl_poin');
-zqry1.Open;
-posisiawal;
+  zqry1.SQL.Clear;
+  zqry1.SQL.Add('select * from tbl_poin');
+  zqry1.Open;
+  posisiawal;
+  end;
+
 end;
 
 procedure TForm6.btn5Click(Sender: TObject);
@@ -168,15 +172,27 @@ end;
 
 procedure TForm6.dgdbgrd1CellClick(Column: TColumn);
 begin
+enable;
+
+btn1.Enabled:= True;
+btn2.Enabled:= False;
+btn3.Enabled:= True;
+btn4.Enabled:= True;
+btn5.Enabled:= True;
+
 id:= zqry1.Fields[0].AsString;
 edt1.Text:= zqry1.Fields[1].AsString;
 edt2.Text:= zqry1.Fields[2].AsString;
-edt3.Text:= zqry1.Fields[3].AsString;
-edt4.Text:= zqry1.Fields[4].AsString;
+Cb1.Text:= zqry1.Fields[3].AsString;
+Cb2.Text:= zqry1.Fields[4].AsString;
+end;
+
+procedure TForm6.enable;
+begin
 edt1.Enabled:= True;
 edt2.Enabled:= True;
-edt3.Enabled:= True;
-edt4.Enabled:= True;
+Cb1.Enabled:= True;
+Cb2.Enabled:= True;
 end;
 
 end.

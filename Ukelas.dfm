@@ -1,6 +1,6 @@
 object Form2: TForm2
-  Left = 455
-  Top = 227
+  Left = 342
+  Top = 195
   Width = 928
   Height = 480
   Caption = 'FORM KELAS'
@@ -41,7 +41,7 @@ object Form2: TForm2
     ParentFont = False
   end
   object dgdbgrd1: TDBGrid
-    Left = 32
+    Left = 40
     Top = 248
     Width = 625
     Height = 177
@@ -132,7 +132,7 @@ object Form2: TForm2
   object edt1: TEdit
     Left = 200
     Top = 48
-    Width = 449
+    Width = 273
     Height = 26
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -142,18 +142,18 @@ object Form2: TForm2
     ParentFont = False
     TabOrder = 6
   end
-  object edt2: TEdit
+  object Cb1: TComboBox
     Left = 200
     Top = 96
-    Width = 449
-    Height = 26
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -15
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
+    Width = 281
+    Height = 21
+    ItemHeight = 13
     TabOrder = 7
+    Text = 'Pilih --'
+    Items.Strings = (
+      'Teknik  Komputer Jaringan'
+      'Rekayasa Perangkat Lunak'
+      'Multimedia')
   end
   object con1: TZConnection
     ControlsCodePage = cGET_ACP
@@ -196,14 +196,6 @@ object Form2: TForm2
     Left = 160
     Top = 320
   end
-  object frxdbkelas: TfrxDBDataset
-    UserName = 'frxdbkelas'
-    CloseDataSource = False
-    DataSet = zqry1
-    BCDToCurrency = False
-    Left = 600
-    Top = 328
-  end
   object frxkelas: TfrxReport
     Version = '4.12.6'
     DotMatrixReport = False
@@ -212,14 +204,14 @@ object Form2: TForm2
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 45106.431242939800000000
-    ReportOptions.LastChange = 45106.490961435200000000
+    ReportOptions.CreateDate = 45101.966930115700000000
+    ReportOptions.LastChange = 45115.768155902780000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
       ''
       'end.')
-    Left = 536
+    Left = 600
     Top = 320
     Datasets = <
       item
@@ -233,65 +225,121 @@ object Form2: TForm2
       Width = 1000.000000000000000000
     end
     object Page1: TfrxReportPage
-      PaperWidth = 210.000000000000000000
-      PaperHeight = 297.000000000000000000
-      PaperSize = 9
+      PaperWidth = 215.900000000000000000
+      PaperHeight = 279.400000000000000000
+      PaperSize = 1
       LeftMargin = 10.000000000000000000
       RightMargin = 10.000000000000000000
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       object ReportTitle1: TfrxReportTitle
-        Height = 60.472480000000000000
+        Height = 45.354360000000000000
         Top = 18.897650000000000000
-        Width = 718.110700000000000000
+        Width = 740.409927000000000000
         object Memo1: TfrxMemoView
-          Left = 120.944960000000000000
-          Top = 18.897650000000000000
-          Width = 219.212740000000000000
+          Left = 230.551330000000000000
+          Top = 11.338590000000000000
+          Width = 241.889920000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -19
+          Font.Height = -20
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          HAlign = haCenter
           Memo.UTF8 = (
             'LAPORAN DATA KELAS')
+          ParentFont = False
+        end
+      end
+      object PageHeader1: TfrxPageHeader
+        Height = 37.795300000000000000
+        Top = 86.929190000000000000
+        Width = 740.409927000000000000
+        object Memo2: TfrxMemoView
+          Left = 143.622140000000000000
+          Width = 37.795300000000000000
+          Height = 37.795275590000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Width = 2.000000000000000000
+          HAlign = haCenter
+          Memo.UTF8 = (
+            'NO')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo3: TfrxMemoView
+          Left = 181.417440000000000000
+          Width = 181.417440000000000000
+          Height = 37.795275590000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Width = 2.000000000000000000
+          HAlign = haCenter
+          Memo.UTF8 = (
+            'NAMA')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo5: TfrxMemoView
+          Left = 362.834880000000000000
+          Width = 192.756030000000000000
+          Height = 37.795275590000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Width = 2.000000000000000000
+          HAlign = haCenter
+          Memo.UTF8 = (
+            'JURUSAN')
           ParentFont = False
           VAlign = vaCenter
         end
       end
       object MasterData1: TfrxMasterData
-        Height = 18.897650000000000000
-        Top = 181.417440000000000000
-        Width = 718.110700000000000000
+        Height = 37.795300000000000000
+        Top = 185.196970000000000000
+        Width = 740.409927000000000000
         DataSet = frxdbkelas
         DataSetName = 'frxdbkelas'
         RowCount = 0
-        object Memo5: TfrxMemoView
-          Left = 34.015770000000000000
-          Width = 94.488250000000000000
-          Height = 18.897650000000000000
+        object Memo6: TfrxMemoView
+          Left = 143.622140000000000000
+          Width = 37.795300000000000000
+          Height = 37.795275590000000000
           ShowHint = False
-          DataField = 'id_kelas'
-          DataSet = frxdbkelas
-          DataSetName = 'frxdbkelas'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = [fsBold]
+          Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Width = 2.000000000000000000
           HAlign = haCenter
           Memo.UTF8 = (
-            '[frxdbkelas."id_kelas"]')
+            '[Line]')
           ParentFont = False
+          VAlign = vaCenter
         end
-        object Memo6: TfrxMemoView
-          Left = 128.504020000000000000
-          Width = 177.637910000000000000
-          Height = 18.897650000000000000
+        object Memo7: TfrxMemoView
+          Left = 181.417440000000000000
+          Width = 181.417440000000000000
+          Height = 37.795275590000000000
           ShowHint = False
           DataField = 'nama'
           DataSet = frxdbkelas
@@ -300,17 +348,19 @@ object Form2: TForm2
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = [fsBold]
+          Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Width = 2.000000000000000000
           HAlign = haCenter
           Memo.UTF8 = (
             '[frxdbkelas."nama"]')
           ParentFont = False
+          VAlign = vaCenter
         end
-        object Memo7: TfrxMemoView
-          Left = 306.141930000000000000
-          Width = 147.401670000000000000
-          Height = 18.897650000000000000
+        object Memo9: TfrxMemoView
+          Left = 362.834880000000000000
+          Width = 192.756030000000000000
+          Height = 37.795275590000000000
           ShowHint = False
           DataField = 'jurusan'
           DataSet = frxdbkelas
@@ -319,20 +369,23 @@ object Form2: TForm2
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = [fsBold]
+          Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Frame.Width = 2.000000000000000000
           HAlign = haCenter
           Memo.UTF8 = (
             '[frxdbkelas."jurusan"]')
           ParentFont = False
+          VAlign = vaCenter
         end
       end
-      object PageHeader1: TfrxPageHeader
-        Height = 18.897650000000000000
-        Top = 102.047310000000000000
-        Width = 718.110700000000000000
-        object Memo2: TfrxMemoView
-          Left = 34.015770000000000000
+      object Footer1: TfrxFooter
+        Height = 37.795300000000000000
+        Top = 245.669450000000000000
+        Width = 740.409927000000000000
+        object Memo10: TfrxMemoView
+          Left = 359.055350000000000000
+          Top = 11.338590000000000000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -340,46 +393,41 @@ object Form2: TForm2
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Font.Style = []
+          Frame.Width = 2.000000000000000000
           HAlign = haCenter
           Memo.UTF8 = (
-            'ID KELAS')
+            'Jumlah Kelas')
           ParentFont = False
+          VAlign = vaCenter
         end
-        object Memo3: TfrxMemoView
-          Left = 128.504020000000000000
-          Width = 177.637910000000000000
+        object Memo11: TfrxMemoView
+          Left = 457.323130000000000000
+          Top = 11.338590000000000000
+          Width = 94.488250000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Font.Style = []
+          Frame.Width = 2.000000000000000000
           HAlign = haCenter
           Memo.UTF8 = (
-            'NAMA')
+            '[COUNT(MasterData1)]')
           ParentFont = False
-        end
-        object Memo4: TfrxMemoView
-          Left = 306.141930000000000000
-          Width = 147.401670000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8 = (
-            'JURUSAN')
-          ParentFont = False
+          VAlign = vaCenter
         end
       end
     end
+  end
+  object frxdbkelas: TfrxDBDataset
+    UserName = 'frxdbkelas'
+    CloseDataSource = False
+    DataSet = zqry1
+    BCDToCurrency = False
+    Left = 600
+    Top = 376
   end
 end

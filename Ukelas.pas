@@ -18,17 +18,18 @@ type
     btn4: TButton;
     btn5: TButton;
     edt1: TEdit;
-    edt2: TEdit;
     con1: TZConnection;
     zqry1: TZQuery;
     ds1: TDataSource;
-    frxdbkelas: TfrxDBDataset;
-    frxkelas: TfrxReport;
+    Cb1: TComboBox;
     intgrfldzqry1id_kelas: TIntegerField;
     strngfldzqry1nama: TStringField;
     strngfldzqry1jurusan: TStringField;
+    frxkelas: TfrxReport;
+    frxdbkelas: TfrxDBDataset;
     procedure posisiawal;
     procedure bersih;
+    procedure enable;
     procedure FormShow(Sender: TObject);
     procedure btn2Click(Sender: TObject);
     procedure btn1Click(Sender: TObject);
@@ -58,14 +59,14 @@ btn2.Enabled:= False;
 btn3.Enabled:= False;
 btn4.Enabled:= False;
 btn5.Enabled:= False;
+
 edt1.Enabled:= False;
-edt2.Enabled:= False;
+Cb1.Enabled:= False;
 end;
 
 procedure TForm2.bersih;
 begin
 edt1.Clear;
-edt2.Clear;
 end;
 
 procedure TForm2.FormShow(Sender: TObject);
@@ -75,24 +76,24 @@ end;
 
 procedure TForm2.btn2Click(Sender: TObject);
 begin
-if edt1.Text ='' then
-begin
-ShowMessage('NAMA SISWA TIDAK BOLEH KOSONG!');
-end else
-if edt2.Text ='' then
-begin
-ShowMessage('JURUSAN TIDAK BOLEH KOSONG!');
-end else
-begin
-zqry1.SQL.Clear; //simpan
-zqry1.SQL.Add('insert into tbl_kelas values(null,"'+edt1.Text+'","'+edt2.Text+'")');
-zqry1.ExecSQL;
+  if (edt1.Text='')then
+  begin
+    ShowMessage('DATA TIDAK BOLEH KOSONG!');
+  end
+  else
+  begin
+  zqry1.SQL.Clear; //simpan
+  zqry1.SQL.Add('insert into tbl_kelas values(null,"'+edt1.Text+'","'+Cb1.Text+'")');
+  zqry1.ExecSQL;
 
-zqry1.SQL.Clear;
-zqry1.SQL.Add('select * from tbl_kelas');
-zqry1.Open;
-ShowMessage('DATA BARHASIL DISIMPAN!');
-posisiawal;
+  zqry1.Close;
+  zqry1.SQL.Clear;
+  zqry1.SQL.Add('select * from tbl_kelas');
+  zqry1.Open;
+  ShowMessage('DATA BARHASIL DISIMPAN!');
+  posisiawal;
+
+
 end;
 
 
@@ -100,14 +101,13 @@ end;
 
 procedure TForm2.btn1Click(Sender: TObject);
 begin
+enable;
 bersih;
 btn1.Enabled:= false;
 btn2.Enabled:= True;
 btn3.Enabled:= False;
 btn4.Enabled:= False;
 btn5.Enabled:= True;
-edt1.Enabled:= True;
-edt2.Enabled:= True;
 end;
 
 procedure TForm2.btn4Click(Sender: TObject);
@@ -115,7 +115,7 @@ begin
 if MessageDlg('APAKAH YAKIN MENGHAPUS DATA INI?',mtWarning,[mbYes,mbNo],0)= mryes then
 begin
 zqry1.SQL.Clear;
-zqry1.SQL.Add(' delete from tbl_kelas where id_kelas="'+id+'"');
+zqry1.SQL.Add('delete from tbl_kelas where id_kelas="'+id+'"');
 zqry1.ExecSQL;
 zqry1.SQL.Clear;
 zqry1.SQL.Add('select * from tbl_kelas');
@@ -132,14 +132,27 @@ end;
 
 procedure TForm2.btn3Click(Sender: TObject);
 begin
-zqry1.SQL.Clear;
-zqry1.SQL.Add('Update tbl_kelas set nama="'+edt1.Text+'",jurusan="'+edt2.Text+'" where id_kelas ="'+id+'"');
-zqry1.ExecSQL;
+if (edt1.Text='')then
+  begin
+    ShowMessage('DATA TIDAK BOLEH KOSONG!');
+  end else
+    if (edt1.Text= zqry1.FieldList[1].AsString) and (Cb1.Text = zqry1.FieldList[2].AsString) then
+  begin
+    ShowMessage('DATA TIDAK ADA PERUBAHAN');
+    posisiawal;
+  end else
+  begin
+  id:=dgdbgrd1.DataSource.DataSet.FieldByName('id').AsString;
+  ShowMessage('DATA BERHASIL DI UPDATE!');
+  zqry1.SQL.Clear;
+  zqry1.SQL.Add('Update tbl_kelas set nama="'+edt1.Text+'",jurusan="'+Cb1.Text+'" where id_kelas ="'+id+'"');
+  zqry1.ExecSQL;
 
-zqry1.SQL.Clear;
-zqry1.SQL.Add('select * from tbl_kelas');
-zqry1.Open;
-posisiawal;
+  zqry1.SQL.Clear;
+  zqry1.SQL.Add('select * from tbl_kelas');
+  zqry1.Open;
+  posisiawal;
+  end;
 
 end;
 
@@ -150,16 +163,22 @@ end;
 
 procedure TForm2.dgdbgrd1CellClick(Column: TColumn);
 begin
-id:= zqry1.Fields[0].AsString;
-edt1.Text:= zqry1.Fields[1].AsString;
-edt2.Text:= zqry1.Fields[2].AsString;
-edt1.Enabled:= True;
-edt2.Enabled:= True;
-btn1.Enabled:= False;
+enable;
+
+btn1.Enabled:= True;
 btn2.Enabled:= False;
 btn3.Enabled:= True;
 btn4.Enabled:= True;
 btn5.Enabled:= True;
+
+edt1.Text:= zqry1.Fields[1].AsString;
+Cb1.Text:= zqry1.Fields[2].AsString;
+end;
+
+procedure TForm2.enable;
+begin
+edt1.Enabled:= True;
+Cb1.Enabled:= True;
 end;
 
 end.

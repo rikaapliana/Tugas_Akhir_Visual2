@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus, Ukelas, Usiswa, Uwalikelas, Usemester, Upoin, Uortu, Uhubungan, Uuser ;
+  Dialogs, Menus, Ukelas, Usiswa, Uwalikelas, Usemester, Upoin, Uortu, Uhubungan, U,  Uuser ;
 
 type
   TForm1 = class(TForm)
@@ -35,6 +35,8 @@ var
   Form1: TForm1;
 
 implementation
+
+
 
 {$R *.dfm}
 
